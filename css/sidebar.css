@@ -1,0 +1,246 @@
+/* NOTA: Las variables CSS (ej: --bg-secondary) deben estar definidas en style.css */
+
+/* =========================================== */
+/* 3. ESTILOS BASE DEL SIDEBAR */
+/* =========================================== */
+
+.sidebar-container {
+background-color: rgba(var(--bg-secondary-rgb), 0.95); /* NOTA: Verás la definición de --bg-secondary-rgb abajo */    width: 250px; 
+    height: 100vh;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    padding: 20px 0;
+    box-shadow: 1px 0 5px rgba(0, 0, 0, 0.05); 
+    box-sizing: border-box;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+    backdrop-filter: blur(4px);
+}
+/* NUEVA REGLA: Efecto Liquid Glass al pasar el mouse */
+.sidebar-container:hover {
+    /* Aplicamos un desenfoque más fuerte */
+    backdrop-filter: blur(12px); 
+    
+    /* Hacemos el fondo un poco más opaco para que destaque */
+    background-color: rgba(var(--bg-secondary-rgb), 0.98); 
+    
+    /* Añadimos una transición para que el cambio sea suave */
+    transition: all 0.5s ease-in-out; 
+}
+
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.logo-app {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+.app-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.sidebar-nav {
+    padding: 20px 0;
+}
+
+.nav-heading {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 20px 8px;
+    margin-top: 0;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-primary);
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: background-color 0.2s;
+    border-radius: 8px;
+    margin: 0 10px;
+}
+
+.nav-item .icon {
+    font-size: 1.1rem;
+    margin-right: 12px;
+}
+
+.nav-item.active a {
+    /* Color fijo de resaltado en modo claro (puedes usar var(--border-color-active)) */
+    background-color: #e8e8ed; 
+    font-weight: 600;
+    color: var(--link-color);
+}
+/* Ajuste de modo oscuro para el elemento activo */
+body.dark-mode .nav-item.active a {
+    background-color: #38383a; /* Fondo más oscuro para activo */
+}
+
+
+.nav-item a:hover {
+    background-color: var(--border-color); 
+}
+
+.nav-divider {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 20px 20px;
+}
+
+.sidebar-footer {
+    padding: 10px 20px 0;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.logout-link {
+    display: block;
+    text-decoration: none;
+    color: #ff3b30; /* Rojo de advertencia/cierre */
+    padding: 10px 0;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.logout-link:hover {
+    opacity: 0.8;
+}
+
+.sidebar-footer .icon {
+    margin-right: 8px;
+}
+
+/* Botón de Menú (Hamburguesa) */
+.menu-btn {
+    display: none; 
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--link-color);
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+}
+
+/* =========================================== */
+/* SWITCH DE MODO OSCURO (CONFIGURACIÓN) */
+/* =========================================== */
+
+.dark-mode-switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.switch-label {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+/* Estructura del interruptor (Switch Style) */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 23px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+}
+
+/* Estado ACTIVADO */
+input:checked + .slider {
+    background-color: #34c759; /* Verde iOS */
+}
+
+input:checked + .slider:before {
+    transform: translateX(17px);
+}
+
+/* Estilo redondeado (iOS) */
+.slider.round {
+    border-radius: 23px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+/* =========================================== */
+/* MEDIA QUERIES (Responsividad del Sidebar) */
+/* =========================================== */
+
+@media screen and (max-width: 768px) {
+    
+    /* A. Sidebar Oculto por Defecto */
+    .sidebar-container {
+        transform: translateX(-100%); 
+        width: 280px; 
+        box-shadow: none; 
+    }
+
+    /* B. Sidebar VISIBLE (Clase activada por JS) */
+    .sidebar-container.open {
+        transform: translateX(0); 
+        box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2); 
+    }
+
+    /* C. Mostrar Botón de Menú */
+    .menu-btn {
+        display: block; 
+    }
+}
